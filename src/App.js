@@ -8,8 +8,8 @@ function App() {
 
   const handleScan = (data) => {
     if (data) {
-      const totalUniq = [...new Set([...state, data])];
-      setState(totalUniq);
+      //const totalUniq = [...new Set([...state, data])];
+      setState([...state, data]);
     }
   };
   const handleError = (err) => {
