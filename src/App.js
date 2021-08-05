@@ -65,9 +65,9 @@ function App() {
         sendData,
         {
           headers: {
-            // "Access-Control-Allow-Methods": "*",
-            // "Access-Control-Allow-Origin": "*",
-            // "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
             Authorization: "Basic d2ViOlF3ZXJ0eTEyMw==",
             "Content-Type": "text/plain",
           },
