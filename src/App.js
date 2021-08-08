@@ -53,9 +53,7 @@ function App() {
   };
 
   const backToScan = () => {
-    setAnimate("animate");
     setResult({});
-    setAnimate("");
   };
 
   const saveData = async () => {
@@ -139,7 +137,10 @@ function App() {
       ) : (
         <>
           <h3>{result?.Nomer}</h3>
-          <button onClick={backToScan} className={`button success ${animate}`}>
+          <button
+            onClick={backToScan}
+            className={`button scan success ${animate}`}
+          >
             сканировать
           </button>
         </>

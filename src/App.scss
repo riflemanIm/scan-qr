@@ -1,7 +1,8 @@
 $button-width: 150px;
 $spinner-width: $button-width/6;
 $blue: #0076d3;
-$btn-bg: #8BC34A;
+$btn-bg: #b8695f;
+$btn-bg-scan: #c3b74a;
 $text-light: #fefefe;
 $red: #ec9f62;
 
@@ -87,7 +88,10 @@ $red: #ec9f62;
   -webkit-appearance: none;
   border: 0;
   transition: border-radius linear 0.05s, width linear 0.05s;
-
+  
+  &.scan{
+    background: $btn-bg-scan;
+  }
   
   &:focus{
     outline: 0;
