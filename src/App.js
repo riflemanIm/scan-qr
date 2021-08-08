@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import QrReader from "react-qr-reader";
 import "./App.scss";
 import axios from "axios";
+import isEmpty from "./helpers";
 
 function App() {
   const [state, setState] = useState([
     { scan: "cod=ЦБ-00322974;ser=00007522", num: 2 },
     { scan: "cod=ЦБ-00322974;ser=00007523", num: 1 },
   ]);
+  const [result, setResult] = useState({});
+
   const findedItem = (data) => state.find((it) => it.scan === data);
   const handleScan = (data) => {
     if (data != null && data.startsWith("cod=")) {
@@ -48,6 +51,13 @@ function App() {
   const handleError = (err) => {
     console.error(err);
   };
+
+  const backToScan = () => {
+    setAnimate("animate");
+    setResult({});
+    setAnimate("");
+  };
+
   const saveData = async () => {
     const isOk = window.confirm("Вы уверены?");
     if (!isOk) return;
@@ -56,67 +66,84 @@ function App() {
       .join("\n")
       .trim();
     console.log(sendData);
+    setAnimate("animate");
 
-    try {
-      setAnimate("animate");
-
-      const { data } = await axios.post(
-        "https://ctx.flowers-south.ru:8088/test3/hs/Obmen/QRCod/",
-        sendData,
-        {
-          headers: {
-            "Access-Control-Allow-Methods": "*",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-            Authorization: "Basic d2ViOlF3ZXJ0eTEyMw==",
-            "Content-Type": "text/plain",
-          },
-        }
-      );
+    setTimeout(() => {
       setAnimate("");
-      console.log("!!!! data !!!!", data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setAnimate("");
-        console.error("!!!! AxiosError !!!!", error);
-      } else {
-        setAnimate("");
-        console.error("!!!! UnexpectedError !!!!", error);
-      }
-    }
+      setResult({
+        Nomer: "0000009",
+      });
+    }, 3000);
+    // try {
+
+    //   const { data } = await axios.post(
+    //     "https://ctx.flowers-south.ru:8088/test3/hs/Obmen/QRCod/",
+    //     sendData,
+    //     {
+    //       headers: {
+    //         "Access-Control-Allow-Methods": "*",
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Credentials": "true",
+    //         Authorization: "Basic d2ViOlF3ZXJ0eTEyMw==",
+    //         "Content-Type": "text/plain",
+    //       },
+    //     }
+    //   );
+    //   setAnimate("");
+    //   console.log("!!!! data !!!!", data);
+    // } catch (error) {
+    //   if (axios.isAxiosError(error)) {
+    //     setAnimate("");
+    //     console.error("!!!! AxiosError !!!!", error);
+    //   } else {
+    //     setAnimate("");
+    //     console.error("!!!! UnexpectedError !!!!", error);
+    //   }
+    // }
   };
   console.log("state ", state);
   return (
     <div className="App">
-      <div className="qr-reader">
-        <QrReader
-          delay={900}
-          onError={handleError}
-          onScan={handleScan}
-          style={{ width: "375px", height: "375px" }}
-        />
-      </div>
-
-      <div className="flex-container">
-        {state.map((it, inx) => (
-          <div className="row" key={inx}>
-            <div className="flex-item1">{it.scan}</div>
-            <div className="flex-item2">{it.num}</div>
-            <div className="flex-item3">
-              <button
-                className="but_minus"
-                dangerouslySetInnerHTML={{ __html: "&#x2212;" }}
-                onClick={() => handleMinus(it.scan)}
-              />
-            </div>
+      {isEmpty(result) ? (
+        <>
+          <div className="qr-reader">
+            <QrReader
+              delay={900}
+              onError={handleError}
+              onScan={handleScan}
+              style={{ width: "375px", height: "375px" }}
+            />
           </div>
-        ))}
-      </div>
-      <p>
-        <button onClick={saveData} className={`button success ${animate}`}>
-          сохранить
-        </button>
-      </p>
+
+          <div className="flex-container">
+            {state.map((it, inx) => (
+              <div className="row" key={inx}>
+                <div className="flex-item1">{it.scan}</div>
+                <div className="flex-item2">{it.num}</div>
+                <div className="flex-item3">
+                  <button
+                    className="but_minus"
+                    dangerouslySetInnerHTML={{ __html: "&#x2212;" }}
+                    onClick={() => handleMinus(it.scan)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <p>
+            <button onClick={saveData} className={`button success ${animate}`}>
+              сохранить
+            </button>
+          </p>
+        </>
+      ) : (
+        <>
+          <h3>{result?.Nomer}</h3>
+          <button onClick={backToScan} className={`button success ${animate}`}>
+            сканировать
+          </button>
+        </>
+      )}
     </div>
   );
 }
