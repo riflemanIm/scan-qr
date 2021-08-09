@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import logo from './logo.svg';
 import QrReader from "react-qr-reader";
 import "./App.scss";
-import axios from "axios";
+//import axios from "axios";
 import isEmpty from "./helpers";
 
 function App() {
