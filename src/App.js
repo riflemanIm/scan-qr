@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import logo from './logo.svg';
 import QrReader from "react-qr-reader";
 import "./App.scss";
-//import axios from "axios";
+import axios from "axios";
 import isEmpty from "./helpers";
 
 function App() {
@@ -66,38 +66,38 @@ function App() {
     console.log(sendData);
     setAnimate("animate");
 
-    setTimeout(() => {
-      setAnimate("");
-      setResult({
-        Nomer: "0000009",
-      });
-    }, 3000);
-    // try {
-
-    //   const { data } = await axios.post(
-    //     "https://ctx.flowers-south.ru:8088/test3/hs/Obmen/QRCod/",
-    //     sendData,
-    //     {
-    //       headers: {
-    //         "Access-Control-Allow-Methods": "*",
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Access-Control-Allow-Credentials": "true",
-    //         Authorization: "Basic d2ViOlF3ZXJ0eTEyMw==",
-    //         "Content-Type": "text/plain",
-    //       },
-    //     }
-    //   );
+    // setTimeout(() => {
     //   setAnimate("");
-    //   console.log("!!!! data !!!!", data);
-    // } catch (error) {
-    //   if (axios.isAxiosError(error)) {
-    //     setAnimate("");
-    //     console.error("!!!! AxiosError !!!!", error);
-    //   } else {
-    //     setAnimate("");
-    //     console.error("!!!! UnexpectedError !!!!", error);
-    //   }
-    // }
+    //   setResult({
+    //     Nomer: "0000009",
+    //   });
+    // }, 3000);
+
+    try {
+      const { data } = await axios.post(
+        "https://ctx.flowers-south.ru:8088/test3/hs/Obmen/QRCod/",
+        sendData,
+        {
+          headers: {
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+            Authorization: "Basic d2ViOlF3ZXJ0eTEyMw==",
+            "Content-Type": "text/plain",
+          },
+        }
+      );
+      setAnimate("");
+      console.log("!!!! data !!!!", data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setAnimate("");
+        console.error("!!!! AxiosError !!!!", error);
+      } else {
+        setAnimate("");
+        console.error("!!!! UnexpectedError !!!!", error);
+      }
+    }
   };
   console.log("state ", state);
   return (
