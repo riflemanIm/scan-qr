@@ -75,13 +75,11 @@ function App() {
 
     try {
       const { data } = await axios.post(
-        "https://ctx.flowers-south.ru:8088/test3/hs/Obmen/QRCod/",
+        "https://ctx.flowers-south.ru:8089/test4/hs/Obmen/QRCod/",
         sendData,
         {
           headers: {
-            "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
             Authorization: "Basic d2ViOlF3ZXJ0eTEyMw==",
             "Content-Type": "text/plain",
           },
