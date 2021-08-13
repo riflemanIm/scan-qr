@@ -74,7 +74,7 @@ function App() {
     // }, 3000);
 
     try {
-      const { data } = await axios.post(
+      const data = await axios.post(
         "https://ctx.flowers-south.ru:8089/test4/hs/Obmen/QRCod/",
         sendData,
         {
