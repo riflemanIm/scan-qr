@@ -7,8 +7,8 @@ import isEmpty from "./helpers";
 
 function App() {
   const [state, setState] = useState([
-    { scan: "cod=ЦБ-00322974;ser=00007522", num: 2 },
-    { scan: "cod=ЦБ-00322974;ser=00007523", num: 1 },
+    // { scan: "cod=ЦБ-00322974;ser=00007522", num: 2 },
+    // { scan: "cod=ЦБ-00322974;ser=00007523", num: 1 },
   ]);
   const [result, setResult] = useState({});
 
@@ -98,7 +98,7 @@ function App() {
       }
     }
   };
-  console.log("result ", result);
+  //console.log("result ", result);
   return (
     <div className="App">
       {isEmpty(result) ? (
