@@ -127,7 +127,7 @@ function App() {
               </div>
             ))}
           </div>
-          {!isEmpty(result) && (
+          {!isEmpty(state) && (
             <p>
               <button
                 onClick={saveData}
