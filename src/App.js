@@ -98,7 +98,7 @@ function App() {
       }
     }
   };
-  console.log("state ", state);
+  console.log("result ", result);
   return (
     <div className="App">
       {isEmpty(result) ? (
