@@ -7,8 +7,8 @@ import isEmpty from "./helpers";
 
 function App() {
   const [state, setState] = useState([
-    // { scan: "cod=ЦБ-00322974;ser=00007522", num: 2 },
-    // { scan: "cod=ЦБ-00322974;ser=00007523", num: 1 },
+    { scan: "cod=ЦБ-00322974;ser=00007522", num: 2 },
+    { scan: "cod=ЦБ-00322974;ser=00007523", num: 1 },
   ]);
   const [result, setResult] = useState({});
 
@@ -127,11 +127,16 @@ function App() {
               </div>
             ))}
           </div>
-          <p>
-            <button onClick={saveData} className={`button success ${animate}`}>
-              сохранить
-            </button>
-          </p>
+          {!isEmpty(result) && (
+            <p>
+              <button
+                onClick={saveData}
+                className={`button success ${animate}`}
+              >
+                сохранить
+              </button>
+            </p>
+          )}
         </>
       ) : (
         <>
