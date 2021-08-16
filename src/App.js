@@ -54,7 +54,7 @@ function App() {
 
   const backToScan = () => {
     setResult({});
-    setState({});
+    setState([]);
   };
 
   const saveData = async () => {
