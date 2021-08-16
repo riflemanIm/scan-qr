@@ -21,9 +21,9 @@ function App() {
 
         console.log("scan, num", scan, num);
         num++;
-        setState([...state.filter((it) => it.scan !== data), { scan, num }]);
+        setState([{ scan, num }, ...state.filter((it) => it.scan !== data)]);
       } else {
-        setState([...state, { scan: data, num: 1 }]);
+        setState([{ scan: data, num: 1 }, ...state]);
       }
     }
   };
@@ -40,7 +40,7 @@ function App() {
 
         if (num > 1) {
           num--;
-          setState([...state.filter((it) => it.scan !== data), { scan, num }]);
+          setState([{ scan, num }, ...state.filter((it) => it.scan !== data)]);
         } else {
           setState([...state.filter((it) => it.scan !== data)]);
         }
@@ -111,7 +111,6 @@ function App() {
               style={{ width: "375px", height: "375px" }}
             />
           </div>
-
           <div className="flex-container">
             {state.map((it, inx) => (
               <div className="row" key={inx}>
@@ -127,6 +126,7 @@ function App() {
               </div>
             ))}
           </div>
+
           {!isEmpty(state) && (
             <p>
               <button
