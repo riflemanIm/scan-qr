@@ -10,11 +10,13 @@ function App() {
     // { scan: "cod=ЦБ-00322974;ser=00007522", num: 2 },
     // { scan: "cod=ЦБ-00322974;ser=00007523", num: 1 },
   ]);
-  const [result, setResult] = useState({});
+  const [resultpost, setResultpost] = useState({});
+  const [scaned, setScaned] = useState(false);
 
   const findedItem = (data) => state.find((it) => it.scan === data);
   const handleScan = (data) => {
-    if (data != null && data.startsWith("cod=")) {
+    if (data != null) {
+      setScaned(true);
       //const totalUniq = [...new Set([...state, data])];
       if (findedItem(data) != null) {
         let { scan, num } = findedItem(data);
@@ -31,7 +33,7 @@ function App() {
   const handleMinus = (data) => {
     const isOk = window.confirm("Вы уверены?");
     if (!isOk) return;
-    if (data != null && data.startsWith("cod=")) {
+    if (data != null) {
       //const totalUniq = [...new Set([...state, data])];
 
       if (findedItem(data) != null) {
@@ -53,8 +55,11 @@ function App() {
   };
 
   const backToScan = () => {
-    setResult({});
-    setState([]);
+    setScaned(false);
+    if (resultpost?.Nomer) {
+      setResultpost({});
+      setState([]);
+    }
   };
 
   const saveData = async () => {
@@ -69,7 +74,7 @@ function App() {
 
     // setTimeout(() => {
     //   setAnimate("");
-    //   setResult({
+    //   setResultpost({
     //     Nomer: "0000009",
     //   });
     // }, 3000);
@@ -88,7 +93,7 @@ function App() {
       );
       setAnimate("");
       console.log("!!!! data !!!!", data);
-      setResult({ ...data });
+      setResultpost({ ...data });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setAnimate("");
@@ -99,19 +104,25 @@ function App() {
       }
     }
   };
-  //console.log("result ", result);
+  //console.log("resultpost ", resultpost);
   return (
     <div className="App">
-      {isEmpty(result) ? (
+      {isEmpty(resultpost) ? (
         <>
-          <div className="qr-reader">
-            <QrReader
-              delay={300}
-              onError={handleError}
-              onScan={handleScan}
-              style={{ width: "375px", height: "375px" }}
-            />
-          </div>
+          {!scaned ? (
+            <div className="qr-reader">
+              <QrReader
+                delay={200}
+                onError={handleError}
+                onScan={handleScan}
+                style={{ width: "375px", height: "375px" }}
+              />
+            </div>
+          ) : (
+            <button onClick={backToScan} className={`button scan success `}>
+              сканировать
+            </button>
+          )}
           <div className="flex-container">
             {state.map((it, inx) => (
               <div className="row" key={inx}>
@@ -141,7 +152,7 @@ function App() {
         </>
       ) : (
         <>
-          <h3>{result?.Nomer}</h3>
+          <h3>{resultpost?.Nomer}</h3>
           <button
             onClick={backToScan}
             className={`button scan success ${animate}`}
