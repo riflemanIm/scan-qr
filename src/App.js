@@ -159,7 +159,7 @@ function App() {
           </button>
         </>
       )}
-      {!scaned && (
+      {scaned && (
         <p style={{ marginTop: "20px" }}>
           <button onClick={backToScan} className={`button scan success `}>
             сканировать
