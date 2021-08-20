@@ -116,8 +116,6 @@ function App() {
                   delay={300}
                   onError={handleError}
                   onScan={handleScan}
-                  legacyMode
-                  resolution={1000}
                   style={{ width: "360px", height: "360px" }}
                 />
               </div>
