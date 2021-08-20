@@ -109,19 +109,15 @@ function App() {
     <div className="App">
       {isEmpty(resultpost) ? (
         <>
-          {!scaned ? (
+          {!scaned && (
             <div className="qr-reader">
               <QrReader
-                delay={10}
+                //delay={10}
                 onError={handleError}
                 onScan={handleScan}
                 style={{ width: "375px", height: "375px" }}
               />
             </div>
-          ) : (
-            <button onClick={backToScan} className={`button scan success `}>
-              сканировать
-            </button>
           )}
           <div className="flex-container">
             {state.map((it, inx) => (
@@ -161,6 +157,10 @@ function App() {
           </button>
         </>
       )}
+
+      <button onClick={backToScan} className={`button scan success `}>
+        сканировать
+      </button>
     </div>
   );
 }
