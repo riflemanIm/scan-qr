@@ -113,10 +113,10 @@ function App() {
             <>
               <div className="qr-reader">
                 <QrReader
-                  //delay={50}
+                  delay={50}
                   onError={handleError}
                   onScan={handleScan}
-                  resolution={300}
+                  resolution={100}
                   style={{ width: "360px", height: "360px" }}
                   //showViewFinder={true}
                 />
