@@ -110,31 +110,33 @@ function App() {
       {isEmpty(resultpost) ? (
         <>
           {!scaned && (
-            <div className="qr-reader">
-              <QrReader
-                //delay={10}
-                onError={handleError}
-                onScan={handleScan}
-                style={{ width: "375px", height: "375px" }}
-              />
-            </div>
-          )}
-          <div className="flex-container">
-            {state.map((it, inx) => (
-              <div className="row" key={inx}>
-                <div className="flex-item1">{it.scan}</div>
-                <div className="flex-item2">{it.num}</div>
-                <div className="flex-item3">
-                  <button
-                    className="but_minus"
-                    dangerouslySetInnerHTML={{ __html: "&#x2212;" }}
-                    onClick={() => handleMinus(it.scan)}
-                  />
-                </div>
+            <>
+              <div className="qr-reader">
+                <QrReader
+                  //delay={10}
+                  onError={handleError}
+                  onScan={handleScan}
+                  style={{ width: "375px", height: "375px" }}
+                />
               </div>
-            ))}
-          </div>
 
+              <div className="flex-container">
+                {state.map((it, inx) => (
+                  <div className="row" key={inx}>
+                    <div className="flex-item1">{it.scan}</div>
+                    <div className="flex-item2">{it.num}</div>
+                    <div className="flex-item3">
+                      <button
+                        className="but_minus"
+                        dangerouslySetInnerHTML={{ __html: "&#x2212;" }}
+                        onClick={() => handleMinus(it.scan)}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
           {!isEmpty(state) && (
             <p>
               <button
