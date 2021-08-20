@@ -116,7 +116,7 @@ function App() {
                   //delay={50}
                   onError={handleError}
                   onScan={handleScan}
-                  resolution={240}
+                  resolution={440}
                   style={{ width: "375px", height: "375px" }}
                   //showViewFinder={true}
                 />
